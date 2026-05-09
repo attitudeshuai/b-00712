@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑社团 - 校园社团管理系统</title>
+    <link href="//unpkg.com/layui@2.9.20/dist/css/layui.css" rel="stylesheet">
+    <link href="/src/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layui-layout layui-layout-admin">
+    <!-- Injected -->
+    
+    <div class="layui-body" style="padding: 15px;">
+        <div class="layui-breadcrumb" style="margin-bottom: 20px;">
+          <a href="/index.html">首页</a>
+          <a href="list.html">社团管理</a>
+          <a><cite id="page-title">添加社团</cite></a>
+        </div>
+
+        <div class="layui-card">
+            <div class="layui-card-header" id="card-title">添加社团</div>
+            <div class="layui-card-body">
+                <form class="layui-form" lay-filter="clubForm" style="width: 600px; margin-top: 20px;">
+                    <!-- Hidden ID -->
+                    <input type="hidden" name="id">
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">社团名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" required lay-verify="required" placeholder="请输入社团名称" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">所属学院</label>
+                        <div class="layui-input-block">
+                            <select name="college" lay-verify="required">
+                                <option value="">请选择学院</option>
+                                <option value="信息工程学院">信息工程学院</option>
+                                <option value="艺术学院">艺术学院</option>
+                                <option value="体育学院">体育学院</option>
+                                <option value="外国语学院">外国语学院</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">成立时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="createTime" class="layui-input" id="createDate" placeholder="yyyy-MM-dd" lay-verify="required">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">社团类型</label>
+                        <div class="layui-input-block">
+                            <select name="type" lay-verify="required">
+                                <option value="">请选择类型</option>
+                                <option value="学术类">学术类</option>
+                                <option value="文艺类">文艺类</option>
+                                <option value="体育类">体育类</option>
+                                <option value="公益类">公益类</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">负责人</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="leader" required lay-verify="required" placeholder="请输入负责人姓名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">联系电话</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="phone" required lay-verify="phone" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">社团简介</label>
+                        <div class="layui-input-block">
+                            <textarea name="intro" placeholder="请输入社团简介" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="save">保存提交</button>
+                            <button type="button" class="layui-btn layui-btn-primary" onclick="history.back()">返回</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//unpkg.com/layui@2.9.20/dist/layui.js"></script>
+<script src="/src/js/common.js"></script>
+<script src="/src/js/club_add.js"></script>
+</body>
+</html>

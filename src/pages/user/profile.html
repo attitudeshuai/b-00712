@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 校园社团管理系统</title>
+    <link href="//unpkg.com/layui@2.9.20/dist/css/layui.css" rel="stylesheet">
+    <link href="/src/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layui-layout layui-layout-admin">
+    <!-- Injected -->
+    
+    <div class="layui-body" style="padding: 15px;">
+        <div class="layui-breadcrumb" style="margin-bottom: 20px;">
+          <a href="/index.html">首页</a>
+          <a><cite>个人中心</cite></a>
+        </div>
+
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">基本信息</div>
+                    <div class="layui-card-body">
+                        <form class="layui-form" lay-filter="infoForm">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">用户名</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="username" readonly class="layui-input layui-bg-gray">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">角色</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="role" readonly class="layui-input layui-bg-gray">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">登录时间</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="loginTime" readonly class="layui-input layui-bg-gray">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">修改密码</div>
+                    <div class="layui-card-body">
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">原密码</label>
+                                <div class="layui-input-block">
+                                    <input type="password" name="oldPassword" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">新密码</label>
+                                <div class="layui-input-block">
+                                    <input type="password" name="newPassword" required lay-verify="required|pass" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">确认密码</label>
+                                <div class="layui-input-block">
+                                    <input type="password" name="confirmPassword" required lay-verify="required|pass" placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="changePwd">确认修改</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//unpkg.com/layui@2.9.20/dist/layui.js"></script>
+<script src="/src/js/common.js"></script>
+<script src="/src/js/profile.js"></script>
+</body>
+</html>

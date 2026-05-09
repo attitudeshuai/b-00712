@@ -1,0 +1,38 @@
+[
+  {
+    "id": "m001",
+    "name": "李四",
+    "studentId": "2023001",
+    "gender": "男",
+    "grade": "2023级",
+    "clubId": "c001",
+    "clubName": "计算机编程协会",
+    "position": "社长",
+    "joinTime": "2023-09-15",
+    "phone": "15000150001"
+  },
+  {
+    "id": "m002",
+    "name": "小红",
+    "studentId": "2023002",
+    "gender": "女",
+    "grade": "2023级",
+    "clubId": "c002",
+    "clubName": "吉他社",
+    "position": "普通成员",
+    "joinTime": "2023-09-20",
+    "phone": "15100151002"
+  },
+  {
+    "id": "m003",
+    "name": "小明",
+    "studentId": "2023003",
+    "gender": "男",
+    "grade": "2023级",
+    "clubId": "c003",
+    "clubName": "篮球社",
+    "position": "副社长",
+    "joinTime": "2023-09-18",
+    "phone": "15200152003"
+  }
+]

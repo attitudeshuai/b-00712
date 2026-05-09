@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - 校园社团管理系统</title>
+    <link href="//unpkg.com/layui@2.9.20/dist/css/layui.css" rel="stylesheet">
+    <link href="/src/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layui-layout layui-layout-admin">
+    <!-- Header and Sidebar injected by common.js -->
+    
+    <div class="layui-body" style="background-color: #f2f2f2; padding: 15px;">
+        <!-- Content Body using CSS Grid -->
+        <style>
+            .dashboard-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr)); /* minmax(0, 1fr) prevents overflow issues */
+                gap: 15px;
+            }
+            .left-column {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .stats-row {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 15px;
+            }
+            .chart-row {
+                flex: 1;
+                display: flex;
+                min-height: 0; /* Important for nested flex scroll/height issues */
+            }
+            .right-column {
+                display: flex;
+            }
+            .recent-list-card {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            .recent-list-card .layui-card-body {
+                flex: 1;
+            }
+            
+            /* Chart Container Override */
+            #type-chart {
+                height: 400px; /* Fixed height to ensure visibility */
+                background: #fff;
+                border-radius: 4px;
+            }
+            
+            /* Remove complex flex rules that might collapse height */
+            .chart-row {
+                display: block;
+                width: 100%;
+            }
+            @media (max-width: 768px) {
+                .dashboard-grid {
+                    grid-template-columns: 1fr;
+                }
+                .stats-row {
+                    grid-template-columns: 1fr; /* Stack stats on mobile */
+                }
+            }
+        </style>
+
+        <div class="dashboard-grid">
+            <!-- Left Column -->
+            <div class="left-column">
+                <div class="stats-row">
+                    <div class="dashboard-stat-card">
+                        <h3><i class="layui-icon layui-icon-flag" style="color: #009688;"></i> 社团总数</h3>
+                        <div class="num" id="club-count">0</div>
+                    </div>
+                    <div class="dashboard-stat-card">
+                        <h3><i class="layui-icon layui-icon-user" style="color: #1E9FFF;"></i> 成员总数</h3>
+                        <div class="num" id="member-count">0</div>
+                    </div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-container" id="type-chart"></div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <div class="recent-list-card">
+                    <div class="layui-card-header" style="border-bottom: 1px solid #f6f6f6;">
+                        <i class="layui-icon layui-icon-notice"></i> 最新动态
+                    </div>
+                    <div class="layui-card-body">
+                        <ul class="layui-timeline" id="recent-activity">
+                            <!-- Dynamic Content -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//unpkg.com/layui@2.9.20/dist/layui.js"></script>
+<script src="//cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="/src/js/common.js"></script>
+<script src="/src/js/index.js"></script>
+</body>
+</html>

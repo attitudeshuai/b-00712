@@ -1,0 +1,72 @@
+/* Global Styles */
+.layui-layout-admin .layui-body {
+    bottom: 0;
+    overflow-y: scroll;
+}
+
+/* Mobile Responsive Tweaks */
+@media screen and (max-width: 768px) {
+    /* Hide Logo on Mobile to make space for Toggle if needed, or adjust position */
+    .layui-layout-admin .layui-logo {
+        display: none !important; 
+    }
+    
+    /* Sidebar hidden by default */
+    .layui-layout-admin .layui-side {
+        transform: translate3d(-200px, 0, 0);
+        transition: transform .3s;
+        z-index: 1000;
+    }
+    
+    .layui-layout-admin .layui-body {
+        left: 0;
+    }
+
+    /* Show Sidebar when toggled */
+    .layui-layout-admin.show-side .layui-side {
+        transform: translate3d(0, 0, 0);
+    }
+    
+    /* Optional: Add a mask when sidebar is open */
+    .layui-layout-admin.show-side::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 200px;
+        right: 0;
+        background: rgba(0,0,0,0.3);
+        z-index: 900;
+    }
+}
+
+.dashboard-stat-card {
+    background: #fff;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+    margin-bottom: 15px;
+}
+.dashboard-stat-card h3 {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+.dashboard-stat-card .num {
+    font-size: 36px;
+    color: #009688;
+    font-weight: bold;
+}
+.chart-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    height: 400px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+}
+.recent-list-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 校园社团管理系统</title>
+    <!-- LayUI CSS -->
+    <link href="//unpkg.com/layui@2.9.20/dist/css/layui.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            width: 400px;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login-header h2 {
+            color: #009688;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <div class="login-header">
+        <h2>校园社团管理系统</h2>
+        <p>管理员登录</p>
+    </div>
+    
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-input-block" style="margin-left: 0;">
+                <input type="text" name="username" required lay-verify="required|username" placeholder="用户名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block" style="margin-left: 0;">
+                <input type="password" name="password" required lay-verify="required|password" placeholder="密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block" style="margin-left: 0;">
+                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="login">登 录</button>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block" style="margin-left: 0;">
+                <button type="reset" class="layui-btn layui-btn-primary layui-btn-fluid">重 置</button>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center; color: #999; font-size: 12px;">
+            <p>默认账号: admin / 默认密码: 123456</p>
+        </div>
+    </form>
+</div>
+
+<!-- LayUI JS -->
+<script src="//unpkg.com/layui@2.9.20/dist/layui.js"></script>
+<!-- App Common JS -->
+<script src="/src/js/common.js"></script>
+<!-- Login JS -->
+<script src="/src/js/login.js"></script>
+
+</body>
+</html>

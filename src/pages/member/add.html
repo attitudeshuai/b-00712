@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑成员 - 校园社团管理系统</title>
+    <link href="//unpkg.com/layui@2.9.20/dist/css/layui.css" rel="stylesheet">
+    <link href="/src/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layui-layout layui-layout-admin">
+    <!-- Injected -->
+    
+    <div class="layui-body" style="padding: 15px;">
+        <div class="layui-breadcrumb" style="margin-bottom: 20px;">
+          <a href="/index.html">首页</a>
+          <a href="list.html">成员管理</a>
+          <a><cite id="page-title">添加成员</cite></a>
+        </div>
+
+        <div class="layui-card">
+            <div class="layui-card-header" id="card-title">添加成员</div>
+            <div class="layui-card-body">
+                <form class="layui-form" lay-filter="memberForm" style="width: 600px; margin-top: 20px;">
+                    <!-- Hidden ID -->
+                    <input type="hidden" name="id">
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">学号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="studentId" required lay-verify="required|number" placeholder="请输入学号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="gender" value="男" title="男" checked>
+                            <input type="radio" name="gender" value="女" title="女">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">年级</label>
+                        <div class="layui-input-block">
+                            <select name="grade" lay-verify="required">
+                                <option value="">请选择年级</option>
+                                <option value="2020级">2020级</option>
+                                <option value="2021级">2021级</option>
+                                <option value="2022级">2022级</option>
+                                <option value="2023级">2023级</option>
+                                <option value="2024级">2024级</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">所属社团</label>
+                        <div class="layui-input-block">
+                            <select name="clubId" lay-verify="required" id="club-select" lay-filter="clubSelect">
+                                <option value="">请选择社团</option>
+                            </select>
+                            <!-- Hidden Field for Club Name -->
+                            <input type="hidden" name="clubName">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">职位</label>
+                        <div class="layui-input-block">
+                            <select name="position" lay-verify="required">
+                                <option value="普通成员">普通成员</option>
+                                <option value="副社长">副社长</option>
+                                <option value="社长">社长</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">加入时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="joinTime" class="layui-input" id="joinDate" placeholder="yyyy-MM-dd" lay-verify="required">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">联系方式</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="phone" required lay-verify="phone" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="save">保存提交</button>
+                            <button type="button" class="layui-btn layui-btn-primary" onclick="history.back()">返回</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//unpkg.com/layui@2.9.20/dist/layui.js"></script>
+<script src="/src/js/common.js"></script>
+<script src="/src/js/member_add.js"></script>
+</body>
+</html>
