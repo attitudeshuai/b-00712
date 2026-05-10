@@ -70,3 +70,17 @@
     border-radius: 4px;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
 }
+
+/* Links for table cells */
+.club-name-link,
+.member-name-link {
+    color: #16baaa;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.club-name-link:hover,
+.member-name-link:hover {
+    color: #0f9f91;
+    text-decoration: underline;
+}
