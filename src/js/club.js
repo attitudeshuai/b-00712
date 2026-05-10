@@ -17,7 +17,7 @@ layui.use(['table', 'form', 'layer'], function(){
         data: clubs,
         cols: [[
             {type: 'numbers', title: '序号', width: 80},
-            {field: 'name', title: '社团名称'},
+            {field: 'name', title: '社团名称', event: 'viewDetail', style: 'color: #1E9FFF; cursor: pointer;'},
             {field: 'college', title: '所属学院'},
             {field: 'type', title: '社团类型', width: 120},
             {field: 'leader', title: '负责人', width: 100},
@@ -54,7 +54,31 @@ layui.use(['table', 'form', 'layer'], function(){
     // Tool Bar Events
     table.on('tool(clubTable)', function(obj){
         const data = obj.data;
-        if(obj.event === 'del'){
+        if(obj.event === 'viewDetail'){
+            const allMembers = JSON.parse(localStorage.getItem(App.STORAGE_KEYS.members) || '[]');
+            const clubMembers = allMembers.filter(m => m.clubId === data.id);
+
+            let html = '';
+            if(clubMembers.length === 0){
+                html = '<div style="text-align:center; padding:30px; color:#999;">暂无成员</div>';
+            } else {
+                html = '<table class="layui-table" style="margin:0;">'
+                    + '<colgroup><col width="80"><col><col width="120"><col width="140"></colgroup>'
+                    + '<thead><tr><th>序号</th><th>姓名</th><th>职位</th><th>入社时间</th></tr></thead><tbody>';
+                clubMembers.forEach(function(m, i){
+                    html += '<tr><td>' + (i + 1) + '</td><td>' + m.name + '</td><td>' + m.position + '</td><td>' + m.joinTime + '</td></tr>';
+                });
+                html += '</tbody></table>';
+            }
+
+            layer.open({
+                type: 1,
+                title: data.name + ' - 成员列表',
+                area: ['520px', '400px'],
+                shadeClose: true,
+                content: '<div style="padding:15px;">' + html + '</div>'
+            });
+        } else if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
                 // Delete from localStorage
                 clubs = JSON.parse(localStorage.getItem(App.STORAGE_KEYS.clubs) || '[]');
