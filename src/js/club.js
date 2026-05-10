@@ -17,7 +17,9 @@ layui.use(['table', 'form', 'layer'], function(){
         data: clubs,
         cols: [[
             {type: 'numbers', title: '序号', width: 80},
-            {field: 'name', title: '社团名称'},
+            {field: 'name', title: '社团名称', templet: function(d){
+                return '<a href="javascript:;" class="club-name-link" data-id="' + d.id + '">' + d.name + '</a>';
+            }},
             {field: 'college', title: '所属学院'},
             {field: 'type', title: '社团类型', width: 120},
             {field: 'leader', title: '负责人', width: 100},
@@ -79,4 +81,66 @@ layui.use(['table', 'form', 'layer'], function(){
             window.location.href = 'add.html?id=' + data.id;
         }
     });
+
+    // Click club name to show member list
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('club-name-link')) {
+            const clubId = e.target.getAttribute('data-id');
+            const club = clubs.find(c => c.id === clubId);
+            if (club) {
+                showClubMembers(club);
+            }
+        }
+    });
 });
+
+function showClubMembers(club) {
+    const members = JSON.parse(localStorage.getItem(App.STORAGE_KEYS.members) || '[]');
+    const clubMembers = members.filter(m => m.clubId === club.id);
+    
+    let memberRowsHtml = '';
+    if (clubMembers.length > 0) {
+        clubMembers.forEach(member => {
+            memberRowsHtml += `
+                <tr>
+                    <td style="padding: 8px 12px; border-bottom: 1px solid #f2f2f2;">${member.name}</td>
+                    <td style="padding: 8px 12px; border-bottom: 1px solid #f2f2f2;">${member.position}</td>
+                    <td style="padding: 8px 12px; border-bottom: 1px solid #f2f2f2;">${member.joinTime}</td>
+                </tr>
+            `;
+        });
+    } else {
+        memberRowsHtml = '<tr><td colspan="3" style="padding: 20px; text-align: center; color: #999;">暂无成员</td></tr>';
+    }
+
+    const content = `
+        <div style="padding: 15px;">
+            <div style="margin-bottom: 15px;">
+                <h3 style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">${club.name}</h3>
+                <div style="color: #666; font-size: 13px;">
+                    <span style="margin-right: 15px;">负责人：${club.leader}</span>
+                    <span>联系电话：${club.phone}</span>
+                </div>
+            </div>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #f8f8f8;">
+                        <th style="padding: 10px 12px; text-align: left; font-weight: bold; border-bottom: 1px solid #e2e2e2;">姓名</th>
+                        <th style="padding: 10px 12px; text-align: left; font-weight: bold; border-bottom: 1px solid #e2e2e2;">职位</th>
+                        <th style="padding: 10px 12px; text-align: left; font-weight: bold; border-bottom: 1px solid #e2e2e2;">入社时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${memberRowsHtml}
+                </tbody>
+            </table>
+        </div>
+    `;
+
+    layer.open({
+        type: 1,
+        title: '社团成员详情',
+        area: ['600px', '500px'],
+        content: content
+    });
+}
