@@ -17,7 +17,9 @@ layui.use(['table', 'form', 'layer'], function(){
         data: clubs,
         cols: [[
             {type: 'numbers', title: '序号', width: 80},
-            {field: 'name', title: '社团名称'},
+            {field: 'name', title: '社团名称', templet: function(d){
+                return '<a href="javascript:;" class="layui-table-link" lay-event="viewMembers">' + d.name + '</a>';
+            }},
             {field: 'college', title: '所属学院'},
             {field: 'type', title: '社团类型', width: 120},
             {field: 'leader', title: '负责人', width: 100},
@@ -54,21 +56,20 @@ layui.use(['table', 'form', 'layer'], function(){
     // Tool Bar Events
     table.on('tool(clubTable)', function(obj){
         const data = obj.data;
-        if(obj.event === 'del'){
+        if(obj.event === 'viewMembers'){
+            showClubMembers(data);
+        } else if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
                 // Delete from localStorage
                 clubs = JSON.parse(localStorage.getItem(App.STORAGE_KEYS.clubs) || '[]');
                 clubs = clubs.filter(c => c.id !== data.id);
                 localStorage.setItem(App.STORAGE_KEYS.clubs, JSON.stringify(clubs));
                 
-                // Also delete associated members? The prompt didn't strictly enforce this but it's good practice.
-                // Requirement says: "各模块数据保持一致性（如成员所属社团删除后，关联成员同步删除）"
                 let members = JSON.parse(localStorage.getItem(App.STORAGE_KEYS.members) || '[]');
                 const initialCount = members.length;
                 members = members.filter(m => m.clubId !== data.id);
                 if(members.length < initialCount) {
                      localStorage.setItem(App.STORAGE_KEYS.members, JSON.stringify(members));
-                     console.log('Deleted associated members');
                 }
 
                 obj.del();
@@ -79,4 +80,35 @@ layui.use(['table', 'form', 'layer'], function(){
             window.location.href = 'add.html?id=' + data.id;
         }
     });
+
+    function showClubMembers(club) {
+        const members = JSON.parse(localStorage.getItem(App.STORAGE_KEYS.members) || '[]');
+        const clubMembers = members.filter(m => m.clubId === club.id);
+
+        let memberListHtml = '';
+        if (clubMembers.length === 0) {
+            memberListHtml = '<div style="text-align: center; padding: 30px; color: #999;">暂无成员</div>';
+        } else {
+            memberListHtml = '<table class="layui-table">';
+            memberListHtml += '<thead><tr><th>序号</th><th>姓名</th><th>职位</th><th>入社时间</th></tr></thead>';
+            memberListHtml += '<tbody>';
+            clubMembers.forEach((m, index) => {
+                memberListHtml += `<tr>
+                    <td>${index + 1}</td>
+                    <td>${m.name}</td>
+                    <td>${m.position}</td>
+                    <td>${m.joinTime || '-'}</td>
+                </tr>`;
+            });
+            memberListHtml += '</tbody></table>';
+        }
+
+        layer.open({
+            type: 1,
+            title: '【' + club.name + '】成员列表',
+            area: ['600px', '450px'],
+            shadeClose: true,
+            content: '<div style="padding: 20px;">' + memberListHtml + '</div>'
+        });
+    }
 });
